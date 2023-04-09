@@ -13,15 +13,10 @@ const Menu = () => {
                     <li className="active">
                         <a href="#">
                             <i className='bx bxs-dashboard' ></i>
-                            <span className="text">Table</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bxs-shopping-bag-alt' ></i>
                             <span className="text">Sniffer</span>
                         </a>
                     </li>
+                   
                    </ul>
                 <ul className="side-menu">
                     <li>

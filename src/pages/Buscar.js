@@ -3,7 +3,8 @@ import Logo from '../styles/img/upchiapas.png';
 const Buscar = () => {
     return (
         <>
-            <section id="content">
+          
+
                 <nav>
                     <i className='bx bx-menu' ></i>
                     <a href="#" className="nav-link">Busca</a>
@@ -20,7 +21,6 @@ const Buscar = () => {
                         <img src={Logo}></img>
                     </a>
                 </nav>
-            </section>
         </>
     )
 }

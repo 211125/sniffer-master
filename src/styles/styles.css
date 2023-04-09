@@ -160,6 +160,12 @@ body {
 	display: flex;
 	justify-content: center;
 }
+@media screen and (max-width: 767px) {
+	/* Estilos para pantallas con ancho máximo de 767px */
+	#sidebar {
+	  display: none;
+	}
+  }
 /* SIDEBAR */
 
 
@@ -207,6 +213,9 @@ body {
 }
 #content nav a {
 	color: var(--dark);
+}.side-menu li.active a {
+    background-color: #4CAF50;
+    color: white;
 }
 #content nav .bx.bx-menu {
 	cursor: pointer;
