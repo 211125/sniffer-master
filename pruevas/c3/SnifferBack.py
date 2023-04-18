@@ -1,15 +1,18 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 import mysql.connector
+import datetime
 from scapy.all import *
+from scapy.layers.l2 import Ether, ARP
 import datetime
 
 
+# create Flask app
 app = Flask(__name__)
 CORS(app)
 
 
-
+# connection to database
 conexion = mysql.connector.connect(user='root', password='211125', host='127.0.0.1', database='arquitectura')
 
 # writer function
@@ -36,14 +39,14 @@ add_all = ("INSERT INTO sniff(mac_src,ip_src, tam_src, fecha, hora) VALUES (%s, 
 get_all = ("SELECT * FROM sniff")
 
 
-# callback function - called for every packet
+# callback function - called for every ARP packet
 def traffic_monitor_callback(pkt):
-    if "IP" in pkt:
+    if ARP in pkt:
         # sniff variables
-        ip_src = pkt["IP"].src
-        tam_ip_src = pkt["IP"].len     
-        mac_src = pkt.src
-
+        ip_src = pkt.psrc
+        tam_ip_src = len(pkt)
+        mac_src = pkt.hwsrc
+    
         # get current date
         fecha = datetime.datetime.now().date()
         hora = datetime.datetime.now().time()
@@ -62,7 +65,7 @@ def traffic_monitor_callback(pkt):
 @app.route('/sniff', methods=['POST'])
 def run_sniff():
     # capture traffic
-    sniff(prn=traffic_monitor_callback, store=0, timeout=30)
+    sniff(prn=traffic_monitor_callback, filter='arp', store=0, timeout=30)
     return "Sniff completed."
 
 
@@ -121,5 +124,4 @@ def get_sniff_by_mac(mac_src):
             'hora': str(row[5])
         })
     return jsonify(json_data)
-
 
