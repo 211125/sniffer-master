@@ -16,21 +16,21 @@ const SignUp = () => {
                     <from>
                         <img src={avatar}></img>
                         <h2 className="title">SignUp</h2>
-                        <div class="form-group">
+                        <div className="form-group">
                             <input type="text" className="form-input" id="nombre" placeholder="nombre completo" />
-                            <label for="text" className="form-label">nombre completo</label>
+                            <label htmlFor="text" className="form-label">nombre completo</label>
                         </div>
                         <div class="form-group">
                             <input type="text" className="form-input " id="email" placeholder="Email" />
-                            <label for="email" className="form-label">Email</label>
+                            <label htmlFor="email" className="form-label">Email</label>
                         </div>
                         <div class="form-group">
                             <input type="password" className="form-input" id="password" placeholder="Password" />
-                            <label for="password" className="form-label">Password</label>
+                            <label htmlFor="password" className="form-label">Password</label>
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <input type="text" className="form-input" id="telefono" placeholder="telefono" />
-                            <label for="text" className="form-label">telefono</label>
+                            <label htmlFor="text" className="form-label">telefono</label>
                         </div>
                         <Link to="/">iniciar sesión</Link>
 

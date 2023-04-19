@@ -10,7 +10,7 @@ const Buscar = ({ searchValue, handleSearchChange, fetchSniffData }) => {
           fetchSniffData();
           return false;
         }}>
-        <div className="form-input">
+        <div className="form-input2">
           <input
             type="search"
             placeholder="fecha (YYYY-MM-DD)"

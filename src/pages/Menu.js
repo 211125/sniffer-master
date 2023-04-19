@@ -1,76 +1,78 @@
-import '../styles/styles.css'
+
 import React, { useState, useEffect } from 'react';
 import Table from '../pages/Table';
+import { Link } from 'react-router-dom';
+import Aceptar from './Aceptar';
+
 const Menu = () => {
-    const [sidebarHidden, setSidebarHidden] = useState(true);
-    const [activeMenuItem, setActiveMenuItem] = useState(0);
-  
-    const handleSidebarToggle = () => {
-      setSidebarHidden(!sidebarHidden);
-    };
-  
-    const handleMenuItemClick = (index) => {
-      setActiveMenuItem(index);
-    };
-  
-    useEffect(() => {
-      const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
-      allSideMenu.forEach((item, index) => {
-        const li = item.parentElement;
-        item.addEventListener('click', () => {
-          allSideMenu.forEach((i) => {
-            i.parentElement.classList.remove('active');
-          });
-          li.classList.add('active');
-          handleMenuItemClick(index);
+  const [sidebarHidden, setSidebarHidden] = useState(true);
+  const [activeMenuItem, setActiveMenuItem] = useState(1);
+  const [showTable, setShowTable] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const handleSidebarToggle = () => {
+    setSidebarHidden(!sidebarHidden);
+  };
+
+  const handleMenuItemClick = (index) => {
+    setActiveMenuItem(index);
+  };
+  useEffect(() => {
+    const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+    allSideMenu.forEach((item, index) => {
+      const li = item.parentElement;
+      item.addEventListener('click', () => {
+        allSideMenu.forEach((i) => {
+          i.parentElement.classList.remove('active');
         });
+        li.classList.add('active');
+        handleMenuItemClick(index);
       });
-    }, []);
-  
-    return ( 
+    });
+  }, []);
+
+  return (
     <div>
-      <section id="sidebar"  className={sidebarHidden ? 'hide' : ''}>
-          <a href="#" class="brand">
-              <i class='bx bx-menu'onClick={handleSidebarToggle} ></i>
-              <span class="text">Sniffer</span>
-              
-          </a>
-          <div class="side-menu top">
-              <li class="active"  className={activeMenuItem === 0 ? 'active' : ''}>
-                  <a href="#">
-                      <i class='bx bxs-dashboard' ></i>
-                      <span class="text">Sniffer</span>
-                  </a>
-              </li>
-              
+      <section id="sidebar" className={sidebarHidden ? 'hide' : ''}>
+        <a href="#" className="brand">
+          <i className='bx bx-menu' onClick={handleSidebarToggle} ></i>
+          <span className="text">Sniffer</span>
+
+        </a>
+        <div className="side-menu top">
+        <li>
+            <a href="#" className={activeMenuItem === 0 ? 'active' : ''}>
+              <i className='bx bxs-dashboard' ></i>
+              <span className="text">Sniffer</span>
+            </a>
+
+          </li>
+          <li>
+            <a href="#" className={activeMenuItem === 1 ? 'active' : ''}>
+              <i className='bx bxs-cog' ></i>
+              <span className="text">Settings</span>
+            </a>
+          </li>
+
+        </div>
+        <div className="side-menu" >
           
-          
-          </div>
-          <div class="side-menu">
-              <li>
-                  <a href="#">
-                      <i class='bx bxs-cog' ></i>
-                      <span class="text">Settings</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="#" class="logout">
-                      <i class='bx bxs-log-out-circle' ></i>
-                      <span class="text">Logout</span>
-                  </a>
-              </li>
-          </div>
+          <li>
+            <a href="#" className="logout" >
+              <i className='bx bxs-log-out-circle' ></i>
+              <span className="text">Logout</span>
+            </a>
+          </li>
+        </div>
       </section>
-  
-  
-  
+
+
+
       <section id="content" >
-          
-      
-              <Table></Table>
+        {activeMenuItem === 1 ? <Aceptar /> : <Table></Table>} 
       </section>
-      </div>
-  
-              )
+
+    </div>
+
+  )
 }
 export default Menu;
