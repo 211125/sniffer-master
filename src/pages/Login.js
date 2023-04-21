@@ -1,14 +1,17 @@
 import avatar from '../styles/img/laptop.png'
 import PictureLogin from '../styles/img/PictureLogin.png'
 import wave from '../styles/img/wave.png'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate,useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from 'sweetalert2'
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Menu from './Menu';
 
 const Login = () => {
-    
+  const [userDetails, setUserDetails] = useState(null);
+  const [isMaster, setIsMaster] = useState(true);
+
     const navigator = useNavigate()
 
     const { handleSubmit, register, formState: { errors } } = useForm();
@@ -18,13 +21,22 @@ const Login = () => {
           .post("http://localhost:5000/loginMaster", data)
           .then((response) => {
             console.log(response.data);
+            setUserDetails(response.data);
+            localStorage.setItem('userData', JSON.stringify(response.data));
+localStorage.setItem("miValorBooleano", true);
+
+            navigator("/Home");
+            
+
+
             Swal.fire({
               title: "Bienvenido!",
               text: response.data.message,
               icon: "success",
               confirmButtonText: "Continuar",
             }).then(() => {
-              navigator("/home");
+             //return <Navigate to="/home"/>
+            
             });
           })
           .catch(() => {
@@ -32,13 +44,21 @@ const Login = () => {
               .post("http://localhost:5000/login", data)
               .then((response) => {
                 console.log(response.data);
+                setUserDetails(response.data);
+                localStorage.setItem('userData', JSON.stringify(response.data));
+                localStorage.setItem("miValorBooleano", false);
+
+                navigator("/Home");
+
+
                 Swal.fire({
                   title: "Bienvenido!",
                   text: response.data.message,
                   icon: "success",
                   confirmButtonText: "Continuar",
                 }).then(() => {
-                  navigator("/home");
+      
+
                 });
               })
               .catch((error) => {
@@ -51,10 +71,12 @@ const Login = () => {
               });
           });
       };
-
+      console.log("2 ."+isMaster)
+    
     return (
         
         <div>
+
             <img className='wave' src={wave} alt="wave"></img>
             <div className='container'>
                 <div className='img'>

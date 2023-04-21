@@ -6,14 +6,14 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import axios from 'axios';
 
-const SignUp = () => {
+const SignUpMaster = () => {
     const [response, setResponse] = useState('');
 
     const { handleSubmit, register, formState: { errors } } = useForm();
 
     const handleSignUp = async (data) => {
         try {
-          const response = await axios.post('http://localhost:5000/usuarios', data);
+          const response = await axios.post('http://localhost:5000/userMaster', data);
           console.log(response.data);
           setResponse(response.data.mensaje);
         } catch (error) {
@@ -33,7 +33,7 @@ const SignUp = () => {
                 <div className='login-content'>
                     <form onSubmit={handleSubmit(handleSignUp)}>
                         <img src={avatar}></img>
-                        <h2 className="title">SignUp</h2>
+                        <h2 className="title">SignUp Master</h2>
                         <div className="form-group">
                             <input
                                 type="text"
@@ -149,4 +149,4 @@ const SignUp = () => {
 
     )
 }
-export default SignUp;
+export default SignUpMaster;

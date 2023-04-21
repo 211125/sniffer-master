@@ -5,6 +5,7 @@ import Buscar from './Buscar';
 
 
 const Table = () => {
+
 	const [csvData, setCsvData] = useState([]);
 
 	const [sniffData, setSniffData] = useState([]);
