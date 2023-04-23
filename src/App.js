@@ -8,6 +8,8 @@ import SignUp from "./pages/SignUp";
 import NotFound from "./pages/Error404";
 import Table from "./pages/Table";
 import SignUpMaster from "./pages/SignUpMaster";
+import PutPassword from "./pages/PutPassword";
+import PutPasMaster from "./pages/PutPassMaster";
 
 function App() {
 
@@ -24,6 +26,10 @@ function App() {
           <Route path="/Home" element={<Home />} />
           <Route path="/SignUpMaster" element={<SignUpMaster />} />
           <Route path="/sniffer" element={<Table />} />
+          <Route path="/PutPassword" element={<PutPassword/>} />
+          <Route path="/PutPasMaster" element={<PutPasMaster></PutPasMaster>} />
+
+
           <Route  path="*" element={<NotFound />} />
 
         </Routes>

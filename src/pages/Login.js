@@ -129,6 +129,8 @@ const Login = () => {
                     {errors.contraseña && <span className="text-danger">{errors.contraseña.message}</span>}
                   </div>
                   <Link to="/SignUp">¿estas registrado? ¡Registrate aqui!</Link>
+                  <Link to="/PutPassword">recover password</Link>
+
                   <button type="submit" className="form-submit" >Login</button>
                 </form>
               </div>

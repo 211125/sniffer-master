@@ -4,9 +4,9 @@ import wave from '../styles/img/wave.png'
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useState,useEffect } from 'react';
-import axios from 'axios';
+import Swal from 'sweetalert2'
 
-const SignUp = () => {
+const PutPasMaster = () => {
     const [response, setResponse] = useState('');
 
     const { handleSubmit, register, formState: { errors } } = useForm();
@@ -15,20 +15,31 @@ const SignUp = () => {
       const userData = JSON.parse(localStorage.getItem('userData'));
       if (!userData) {
       } else if (window.location.pathname !== '/Home') {
-        // Si hay datos de usuario en el localStorage pero la página actual no es Home, redirigir al usuario a Home.
         window.location.href = '/Home';
       }
     }, []);
     const handleSignUp = async (data) => {
         try {
-          const response = await axios.post('http://localhost:5000/usuarios', data);
-          console.log(response.data);
-          setResponse(response.data.mensaje);
-        } catch (error) {
-          console.error(error.response.data);
-          setResponse(error.response.data.mensaje);
+          const response = await fetch(`http://localhost:5000/userMaster/${data.correo}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ nueva_contraseña: data.nueva_contraseña }),
+            
         }
-      }
+        );
+          if (response.ok) {
+            setResponse('Contraseña actualizada correctamente');
+          } else {
+            setResponse('Error al actualizar contraseña');
+          }
+        } catch (error) {
+          console.log(error);
+          setResponse('Error asl actualizar contraseña');
+        }
+      };
+      
       
     return (
         <div>
@@ -39,34 +50,10 @@ const SignUp = () => {
                 </div>
 
                 <div className='login-content'>
-                    <form onSubmit={handleSubmit(handleSignUp)}>
+                    <form >
                         <img src={avatar}></img>
                         <h2 className="title">SignUp</h2>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-input"
-                                id="nombre_completo"
-                                placeholder="nombre completo"
-                                {...register("nombre_completo", {
-                                    required: "Este campo es requerido",
-                                    minLength: {
-                                        value: 6,
-                                        message: "El nombre completo debe tener al menos 6 letras",
-                                    },
-                                    pattern: {
-                                        value: /^[a-zA-Z]+$/,
-                                        message: "El nombre completo no debe tener números",
-                                    },
-                                })}
-                            />
-
-                            {errors.nombre_completo && (
-                                <span className="text-danger">{errors.nombre_completo.message}</span>
-                            )} <label htmlFor="text" className="form-label">
-                                nombre completo
-                            </label>
-                        </div>
+                       
                         <div className="form-group">
                             <input
                                 type="text"
@@ -92,9 +79,9 @@ const SignUp = () => {
                             <input
                                 type="password"
                                 className="form-input"
-                                id="contraseña"
-                                placeholder="Contraseña"
-                                {...register("contraseña", {
+                                id="nueva_contraseña"
+                                placeholder="Nueva Contraseña"
+                                {...register("nueva_contraseña", {
                                     required: "Este campo es requerido",
                                     minLength: {
                                         value: 4,
@@ -107,39 +94,15 @@ const SignUp = () => {
                                     },
                                 })}
                             />
-                            {errors.contraseña && (
-                                <span className="text-danger">{errors.contraseña.message}</span>
+                            {errors.nueva_contraseña && (
+                                <span className="text-danger">{errors.nueva_contraseña.message}</span>
                             )}
                             <label htmlFor="contraseña" className="form-label">
-                                Contraseña
-                            </label>
-
-
-                        </div>
-
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-input"
-                                id="telefono"
-                                placeholder="telefono"
-                                {...register("telefono", {
-                                    required: "Este campo es requerido",
-                                    pattern: {
-                                        value: /^[0-9]{10}$/,
-                                        message: "El número de teléfono debe tener 10 dígitos y no aceptar letras"
-                                    }
-                                })}
-                            />
-                            {errors.telefono && (
-                                <span className="text-danger">{errors.telefono.message}</span>
-                            )}
-                            <label htmlFor="telefono" className="form-label">
-                                telefono
+                            Nueva Contraseña
                             </label>
                         </div>
+
                         <Link to="/">iniciar sesión</Link>
-                        <Link to="/SignUpMaster">SignUp Master</Link>
 
 
                         <button type="submit" className="form-submit" onClick={handleSubmit(handleSignUp)}>
@@ -158,4 +121,4 @@ const SignUp = () => {
 
     )
 }
-export default SignUp;
+export default PutPasMaster;

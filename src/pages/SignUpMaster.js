@@ -5,8 +5,44 @@ import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const SignUpMaster = () => {
+    const PIN = "123";
+
+    useEffect(() => {
+      const showPinPrompt = () => {
+        Swal.fire({
+          title: 'Ingresa el Pin',
+          input: 'password',
+          inputAttributes: {
+            autocapitalize: 'off'
+          },
+          showCancelButton: false,
+          confirmButtonText: 'Ingresar',
+          allowOutsideClick: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if (result.value === PIN) {
+              // El pin es correcto, haz lo que quieras aquí
+              console.log('Pin correcto');
+            } else {
+              // El pin es incorrecto, muestra un mensaje de error y vuelve a mostrar el SweetAlert
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Pin incorrecto, inténtalo de nuevo'
+              }).then(() => {
+                showPinPrompt();
+              });
+            }
+          }
+        });
+      }
+  
+      showPinPrompt();
+    }, []);
+
     const [response, setResponse] = useState('');
 
     const { handleSubmit, register, formState: { errors } } = useForm();
