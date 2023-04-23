@@ -5,9 +5,8 @@ import "./styles/styles.css"
 import Home from './components/Home'
 import Login from './pages/Login';
 import SignUp from "./pages/SignUp";
-import Aceptar from "./pages/Aceptar";
+import NotFound from "./pages/Error404";
 import Table from "./pages/Table";
-import { UserProvider } from "./pages/UserProvider";
 import SignUpMaster from "./pages/SignUpMaster";
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
  
   return (
     <div>
-       <UserProvider>
+    
       <Router>
         <Routes>
 
@@ -25,10 +24,11 @@ function App() {
           <Route path="/Home" element={<Home />} />
           <Route path="/SignUpMaster" element={<SignUpMaster />} />
           <Route path="/sniffer" element={<Table />} />
+          <Route  path="*" element={<NotFound />} />
 
         </Routes>
       </Router>
-      </UserProvider>
+     
     </div>
 
   );

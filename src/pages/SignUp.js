@@ -3,14 +3,22 @@ import PictureLogin from '../styles/img/PictureLogin.png'
 import wave from '../styles/img/wave.png'
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import axios from 'axios';
 
 const SignUp = () => {
     const [response, setResponse] = useState('');
 
     const { handleSubmit, register, formState: { errors } } = useForm();
-
+    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
+    useEffect(() => {
+      const userData = JSON.parse(localStorage.getItem('userData'));
+      if (!userData) {
+      } else if (window.location.pathname !== '/Home') {
+        // Si hay datos de usuario en el localStorage pero la página actual no es Home, redirigir al usuario a Home.
+        window.location.href = '/Home';
+      }
+    }, []);
     const handleSignUp = async (data) => {
         try {
           const response = await axios.post('http://localhost:5000/usuarios', data);

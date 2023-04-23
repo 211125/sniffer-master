@@ -2,21 +2,22 @@ import React, { useState, useEffect } from 'react';
 import Table from '../pages/Table';
 import { Link } from 'react-router-dom';
 import Aceptar from './Aceptar';
+import NotFound from './Error404';
 
 
 const Menu = () => {
- // Recuperar un valor booleano de localStorage
-const miValorBooleano = localStorage.getItem("miValorBooleano") === "true";
+  const miValorBooleano = localStorage.getItem("miValorBooleano") === "true";
 console.log("local es. "+miValorBooleano)
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
   const showSettingsButton = miValorBooleano;
   
   useEffect(() => {
-    // Actualizar información del usuario si cambia en el almacenamiento local
     const updateUserData = () => {
       setUserData(JSON.parse(localStorage.getItem('userData')));
     };
     window.addEventListener('storage', updateUserData);
+   
+   
     return () => window.removeEventListener('storage', updateUserData);
   }, []);
 
@@ -44,17 +45,32 @@ console.log("local es. "+miValorBooleano)
       });
     });
   }, []);
+ const LongOut = () =>{
+  localStorage.removeItem('userData');
 
+ }
+ const [brandClass, setBrandClass] = useState('brand2 large');
+
+ useEffect(() => {
+   if (userData && userData.nombre_completo) {
+     const nombre_completo = userData.nombre_completo.trim();
+     if (nombre_completo.length > 20) {
+       setBrandClass('brand2 small');
+     } else {
+       setBrandClass('brand2 large');
+     }
+   }
+ }, [userData]);
   return (
-    <div>
-      <section id="sidebar" className={sidebarHidden ? 'hide' : ''}>
+    <div >
+       {userData ? (
+        <di>
+           <section id="sidebar" className={sidebarHidden ? 'hide' : ''}>
         <a href="#" className="brand">
           <i className='bx bx-menu' onClick={handleSidebarToggle} ></i>
-          {userData && (
-
-            <span className="text">{userData.nombre_completo}</span>
-
-          )}
+        {userData && (
+          <span className={brandClass}>{userData.nombre_completo}</span>
+        )}
 
         </a>
         <div className="user-info bg-light p-3">
@@ -84,10 +100,10 @@ console.log("local es. "+miValorBooleano)
         <div className="side-menu" >
 
           <li>
-            <a href="#" className="logout" >
+            <Link to="/" onClick={LongOut} className="logout" >
               <i className='bx bxs-log-out-circle' ></i>
               <span className="text">Logout</span>
-            </a>
+            </Link>
           </li>
         </div>
 
@@ -98,6 +114,11 @@ console.log("local es. "+miValorBooleano)
       <section id="content" >
         {activeMenuItem === 0 ? <Table /> : <Aceptar />}
       </section>
+        </di>
+      ) : (
+        <NotFound />
+      )}
+     
 
     </div>
 
