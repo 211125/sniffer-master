@@ -2,7 +2,6 @@
 from flask import Blueprint, request,jsonify
 from config.config import conexion
 from flask_cors import CORS
-import mysql.connector
 from scapy.all import *
 import datetime
 from model.modelUser import crear_tabla
@@ -19,8 +18,6 @@ crear_tabla()
 
 # sql command to create table if it doesn't exist
 
-
-# sql command to insert data into table
 add_all = ("INSERT INTO sniff(mac_src,ip_src, tam_src, fecha, hora) VALUES (%s, %s, %s, %s, %s)")
 
 get_all = ("SELECT * FROM sniff")
@@ -111,5 +108,3 @@ def get_sniff_by_mac(mac_src):
             'hora': str(row[5])
         })
     return jsonify(json_data)
-
-
