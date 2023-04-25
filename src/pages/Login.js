@@ -17,8 +17,7 @@ const Login = () => {
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
     } else if (window.location.pathname !== '/Home') {
-      // Si hay datos de usuario en el localStorage pero la página actual no es Home, redirigir al usuario a Home.
-      window.location.href = '/Home';
+      navigator("/Home");
     }
   }, []);
   
@@ -45,7 +44,6 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "Continuar",
         }).then(() => {
-          //return <Navigate to="/home"/>
 
         });
       })
@@ -73,7 +71,7 @@ const Login = () => {
           })
           .catch((error) => {
             Swal.fire({
-              title: "Error!",
+              title: "Error contraseña o correo invalido",
               text: error.response.data.message,
               icon: "error",
               confirmButtonText: "Continuar",

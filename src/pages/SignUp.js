@@ -1,13 +1,14 @@
 import avatar from '../styles/img/laptop.png'
 import PictureLogin from '../styles/img/PictureLogin.png'
 import wave from '../styles/img/wave.png'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 
 const SignUp = () => {
     const [response, setResponse] = useState('');
+    const navigator = useNavigate()
 
     const { handleSubmit, register, formState: { errors } } = useForm();
     const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
@@ -15,8 +16,7 @@ const SignUp = () => {
       const userData = JSON.parse(localStorage.getItem('userData'));
       if (!userData) {
       } else if (window.location.pathname !== '/Home') {
-        // Si hay datos de usuario en el localStorage pero la página actual no es Home, redirigir al usuario a Home.
-        window.location.href = '/Home';
+        navigator("/Home");
       }
     }, []);
     const handleSignUp = async (data) => {
@@ -55,7 +55,7 @@ const SignUp = () => {
                                         message: "El nombre completo debe tener al menos 6 letras",
                                     },
                                     pattern: {
-                                        value: /^[a-zA-Z]+$/,
+                                        value: /^[a-zA-Z ]+$/,
                                         message: "El nombre completo no debe tener números",
                                     },
                                 })}

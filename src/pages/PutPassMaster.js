@@ -1,22 +1,59 @@
 import avatar from '../styles/img/laptop.png'
 import PictureLogin from '../styles/img/PictureLogin.png'
 import wave from '../styles/img/wave.png'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useState,useEffect } from 'react';
 import Swal from 'sweetalert2'
 
 const PutPasMaster = () => {
     const [response, setResponse] = useState('');
+    const navigator = useNavigate()
 
+    const PIN = "123";
+
+    useEffect(() => {
+        const showPinPrompt = () => {
+          Swal.fire({
+            title: 'Ingresa el Pin',
+            input: 'password',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Ingresar',
+            cancelButtonText: 'Cancelar',
+            allowOutsideClick: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              if (result.value === PIN) {
+                console.log('Pin correcto');
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Pin incorrecto, inténtalo de nuevo'
+                }).then(() => {
+                  showPinPrompt();
+                });
+              }
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                navigator("/");
+
+            }
+          });
+        }
+      
+        showPinPrompt();
+      }, []);
     const { handleSubmit, register, formState: { errors } } = useForm();
     const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
     useEffect(() => {
       const userData = JSON.parse(localStorage.getItem('userData'));
       if (!userData) {
       } else if (window.location.pathname !== '/Home') {
-        window.location.href = '/Home';
-      }
+        navigator("/Home");
+    }
     }, []);
     const handleSignUp = async (data) => {
         try {

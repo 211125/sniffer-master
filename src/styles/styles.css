@@ -8,6 +8,10 @@
 .response-message {
 	color:#0062cc;
   }
+  .text-danger{
+	color: red;
+}
+
 
   .search-btn {
 	display: flex;
@@ -626,9 +630,6 @@ body {
 		border-radius: none;
 		color: var(--dark);
 	}
-.text-danger{
-	color: red;
-}
 
   
 	#content nav form.show .form-input2 input {

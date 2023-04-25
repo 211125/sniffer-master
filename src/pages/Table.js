@@ -134,8 +134,7 @@ const Table = () => {
 					<div className="order">
 						<div className="head">
 							<h3>Datos</h3>
-							<i className='bx bx-search' ></i>
-							<i className='bx bx-filter' ></i>
+						
 						</div>
 						<div style={{ height: '400px', overflow: 'scroll' }}>
 							<table id="my-table">

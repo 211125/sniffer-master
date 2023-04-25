@@ -1,48 +1,52 @@
 import avatar from '../styles/img/laptop.png'
 import PictureLogin from '../styles/img/PictureLogin.png'
 import wave from '../styles/img/wave.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const SignUpMaster = () => {
+    const navigator = useNavigate()
+
     const PIN = "123";
 
     useEffect(() => {
-      const showPinPrompt = () => {
-        Swal.fire({
-          title: 'Ingresa el Pin',
-          input: 'password',
-          inputAttributes: {
-            autocapitalize: 'off'
-          },
-          showCancelButton: false,
-          confirmButtonText: 'Ingresar',
-          allowOutsideClick: false
-        }).then((result) => {
-          if (result.isConfirmed) {
-            if (result.value === PIN) {
-              // El pin es correcto, haz lo que quieras aquí
-              console.log('Pin correcto');
-            } else {
-              // El pin es incorrecto, muestra un mensaje de error y vuelve a mostrar el SweetAlert
-              Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Pin incorrecto, inténtalo de nuevo'
-              }).then(() => {
-                showPinPrompt();
-              });
-            }
-          }
-        });
-      }
-  
-      showPinPrompt();
-    }, []);
+        const showPinPrompt = () => {
+          Swal.fire({
+            title: 'Ingresa el Pin',
+            input: 'password',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Ingresar',
+            cancelButtonText: 'Cancelar',
+            allowOutsideClick: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              if (result.value === PIN) {
+                console.log('Pin correcto');
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Pin incorrecto, inténtalo de nuevo'
+                }).then(() => {
+                  showPinPrompt();
+                });
+              }
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                navigator("/");
 
+            }
+          });
+        }
+      
+        showPinPrompt();
+      }, []);
+      
     const [response, setResponse] = useState('');
 
     const { handleSubmit, register, formState: { errors } } = useForm();
@@ -51,8 +55,7 @@ const SignUpMaster = () => {
       const userData = JSON.parse(localStorage.getItem('userData'));
       if (!userData) {
       } else if (window.location.pathname !== '/Home') {
-        // Si hay datos de usuario en el localStorage pero la página actual no es Home, redirigir al usuario a Home.
-        window.location.href = '/Home';
+        navigator("/Home");
       }
     }, []);
     const handleSignUp = async (data) => {
