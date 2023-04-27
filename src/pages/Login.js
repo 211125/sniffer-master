@@ -113,18 +113,30 @@ const Login = () => {
                     <label htmlFor="correo" className="form-label">Correo</label>
                   </div>
                   <div className="form-group">
-                    <input type='password' className='form-input' id='contraseña' placeholder='Contraseña' required {...register("contraseña", {
-                      required: {
-                        value: true,
-                        message: "El campo requerido",
-                      },
-                      minLength: {
-                        value: 4,
-                        message: "La contraseña debe tener minimo 4 caracteres"
-                      }
-                    })} />
-                    <label htmlFor="password" className="form-label">Password</label>
-                    {errors.contraseña && <span className="text-danger">{errors.contraseña.message}</span>}
+                  <input
+                                type="password"
+                                className="form-input"
+                                id="contraseña"
+                                placeholder="Contraseña"
+                                {...register("contraseña", {
+                                    required: "Este campo es requerido",
+                                    minLength: {
+                                        value: 4,
+                                        message: "La contraseña debe tener mínimo 4 caracteres",
+                                    },
+                                    pattern: {
+                                        value: /(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&_-]{4,}/,
+                                        message:
+                                            "La contraseña debe tener mínimo una letra mayúscula y un símbolo @$!%*?&",
+                                    }, 
+                                })}
+                            />
+                            {errors.contraseña && (
+                                <span className="text-danger">{errors.contraseña.message}</span>
+                            )}
+                            <label htmlFor="contraseña" className="form-label">
+                                Contraseña
+                            </label>
                   </div>
                   <Link to="/SignUp">¿estas registrado? ¡Registrate aqui!</Link>
                   <Link to="/PutPassword">recover password</Link>

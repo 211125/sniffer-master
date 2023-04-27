@@ -104,7 +104,7 @@ const SignUp = () => {
                                         value: /(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&_-]{4,}/,
                                         message:
                                             "La contraseña debe tener mínimo una letra mayúscula y un símbolo @$!%*?&",
-                                    },
+                                    }, 
                                 })}
                             />
                             {errors.contraseña && (
