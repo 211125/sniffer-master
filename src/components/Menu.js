@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Table from '../pages/Table';
+import Table from '../pages/Sniffer';
 import { Link } from 'react-router-dom';
-import Aceptar from './Aceptar';
-import NotFound from './Error404';
+import Aceptar from '../pages/UserAdmin';
+import NotFound from '../pages/NotFound';
 
 
 const Menu = () => {

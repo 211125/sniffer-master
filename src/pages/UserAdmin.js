@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import Buscar from './Buscar';
+import Buscar from './search';
 import Logo from '../styles/img/upchiapas.png';
 import user from '../styles/img/laptop.png';
 

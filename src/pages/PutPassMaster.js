@@ -144,7 +144,7 @@ const PutPasMaster = () => {
 
                         <button type="submit" className="form-submit" onClick={handleSubmit(handleSignUp)}>
 
-                            SignUp
+                        recovery password
                         </button>
                         {response && (
                             <div className="response-message">{response}</div>

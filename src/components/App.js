@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Routes, Route,Navigate } from "react-router-do
 
 import "boxicons/css/boxicons.min.css";
 import "./styles/styles.css"
-import Home from './components/Home'
-import Login from './pages/Login';
-import SignUp from "./pages/SignUp";
-import NotFound from "./pages/Error404";
-import Table from "./pages/Table";
-import SignUpMaster from "./pages/SignUpMaster";
-import PutPassword from "./pages/PutPassword";
-import PutPasMaster from "./pages/PutPassMaster";
+import Home from './Home'
+import Login from '../pages/Login';
+import SignUp from "../pages/SignUp";
+import NotFound from "../pages/Error404";
+import Table from "../pages/Table";
+import SignUpMaster from "../pages/SignUpMaster";
+import PutPassword from "../pages/PutPassword";
+import PutPasMaster from "../pages/PutPassMaster";
 
 function App() {
 

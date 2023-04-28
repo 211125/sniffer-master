@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CSVLink } from 'react-csv';
 import Swal from 'sweetalert2';
-import Buscar from './Buscar';
+import Buscar from './search';
 
 
 const Table = () => {

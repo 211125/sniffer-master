@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from 'sweetalert2'
 import React, { useState,useEffect } from 'react';
-import Menu from './Menu';
-import NotFound from './Error404';
+import Menu from '../components/Menu';
+import NotFound from './NotFound';
 
 const Login = () => {
   const [userDetails, setUserDetails] = useState(null);
