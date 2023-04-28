@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route,Navigate } from "react-router-dom";
 
 import "boxicons/css/boxicons.min.css";
-import "./styles/styles.css"
+import "../styles/styles.css"
 import Home from './Home'
 import Login from '../pages/Login';
 import SignUp from "../pages/SignUp";
-import NotFound from "../pages/Error404";
-import Table from "../pages/Table";
+import NotFound from "../pages/NotFound";
+import Table from "../pages/UserAdmin";
 import SignUpMaster from "../pages/SignUpMaster";
 import PutPassword from "../pages/PutPassword";
 import PutPasMaster from "../pages/PutPassMaster";

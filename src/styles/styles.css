@@ -108,8 +108,6 @@ body {
 
 
 
-
-/* Menu */
 #sidebar {
 	position: fixed;
 	top: 0;
@@ -233,19 +231,7 @@ body {
 	display: flex;
 	justify-content: center;
 }
-@media screen and (max-width: 767px) {
-	/* Estilos para pantallas con ancho máximo de 767px */
-	#sidebar {
-	  display: none;
-	}
-  }
-/* SIDEBAR */
 
-
-
-
-
-/* CONTENT */
 #content {
 	position: relative;
 	width: calc(100% - 280px);
@@ -256,7 +242,16 @@ body {
 	width: calc(100% - 60px);
 	left: 60px;
 }
-
+nav.active {
+	display: block;
+  }
+  
+  
+  
+  
+  
+  
+  
 
 
 
@@ -390,7 +385,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	grid-gap: 16px;
+	grid-gap: 30px;
 	flex-wrap: wrap;
 }
 #content main .head-title .left h1 {
@@ -428,7 +423,17 @@ body {
 	font-weight: 500;
 }
 
-
+@media (max-width: 767px) {
+	#content main .head-title {
+	flex-direction: column;
+	align-items: flex-start;
+	}
+	#content main .head-title .btn-download {
+	margin-top: 20px;
+	}
+	}
+	
+	
 
 
 #content main .box-info {

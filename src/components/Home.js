@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Buscar from '../pages/Buscar';
-import Table from '../pages/Table';
-import Menu from '../pages/Menu';
+
+import Menu from './Menu';
 
 function Home() {
     return (
