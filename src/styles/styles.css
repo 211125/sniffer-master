@@ -426,6 +426,7 @@ nav.active {
 @media (max-width: 767px) {
 	#content main .head-title {
 	flex-direction: column;
+	
 	align-items: flex-start;
 	}
 	#content main .head-title .btn-download {
