@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask
-from controller.controllerUsuario import app1_bp
+from controller.controllerUser import app1_bp
 from controller.controllerSniffer import app2_bp
 from controller.controllerUserMaster import app3_bp
 
